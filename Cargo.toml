@@ -6,6 +6,7 @@ version = "0.1.1"
 authors = ["Temirkhan Myrzamadi <hirrolot@gmail.com>"]
 keywords = ["tokio", "either"]
 categories = ["asynchronous", "rust-patterns"]
+documentation = "https://docs.rs/tokio-either/"
 edition = "2018"
 readme = "README.md"
 license = "MIT"
