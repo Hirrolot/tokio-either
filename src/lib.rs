@@ -1,4 +1,6 @@
 use std::{
+    fmt,
+    fmt::{Debug, Formatter},
     pin::Pin,
     task::{Context, Poll},
 };
@@ -53,6 +55,19 @@ where
         match self.get_mut() {
             Self::Left(l) => Pin::new(l).poll_shutdown(cx),
             Self::Right(r) => Pin::new(r).poll_shutdown(cx),
+        }
+    }
+}
+
+impl<L, R> Debug for Either<L, R>
+where
+    L: Debug,
+    R: Debug,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Left(l) => l.fmt(f),
+            Self::Right(r) => r.fmt(f),
         }
     }
 }
