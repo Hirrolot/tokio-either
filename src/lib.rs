@@ -1,11 +1,10 @@
 use std::{
-    fmt,
-    fmt::{Debug, Formatter},
     pin::Pin,
     task::{Context, Poll},
 };
 use tokio::io::{AsyncRead, AsyncWrite};
 
+#[derive(Debug, Clone)]
 pub enum Either<L, R> {
     Left(L),
     Right(R),
@@ -55,19 +54,6 @@ where
         match self.get_mut() {
             Self::Left(l) => Pin::new(l).poll_shutdown(cx),
             Self::Right(r) => Pin::new(r).poll_shutdown(cx),
-        }
-    }
-}
-
-impl<L, R> Debug for Either<L, R>
-where
-    L: Debug,
-    R: Debug,
-{
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::Left(l) => l.fmt(f),
-            Self::Right(r) => r.fmt(f),
         }
     }
 }
