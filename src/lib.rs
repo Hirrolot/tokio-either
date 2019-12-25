@@ -68,3 +68,20 @@ where
         }
     }
 }
+
+impl<L, R> Stream for Either<L, R>
+where
+    L: Stream,
+    R: Stream<Item = L::Item>,
+{
+    type Item = L::Item;
+
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Option<Self::Item>> {
+        unsafe {
+            match self.get_unchecked_mut() {
+                Self::Left(l) => Pin::new_unchecked(l).poll_next(cx),
+                Self::Right(r) => Pin::new_unchecked(r).poll_next(cx),
+            }
+        }
+    }
+}
