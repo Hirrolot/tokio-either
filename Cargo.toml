@@ -2,7 +2,7 @@
 name = "tokio-either"
 description = "Either for Tokio"
 repository = "https://github.com/Hirrolot/tokio-either"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Temirkhan Myrzamadi <hirrolot@gmail.com>"]
 keywords = ["tokio", "either"]
 categories = ["asynchronous", "rust-patterns"]
